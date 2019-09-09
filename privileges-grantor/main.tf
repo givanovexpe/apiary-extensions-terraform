@@ -75,11 +75,11 @@ EOF
 
 data "template_file" "filter_policy" {
   template = <<JSON
-{$${filter_policy}
+{$${val}
 }
 JSON
 	vars {
-		filter_policy = format("\n%s",
+		val = format("\n%s",
 		  join(",\n",
 			compact(
 			  list(
