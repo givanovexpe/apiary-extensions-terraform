@@ -79,17 +79,11 @@ data "template_file" "filter_policy" {
 }
 JSON
 	vars {
-		val = format("\n%s",
-		  join(",\n",
-			compact(
-			  list(
-				"eventType": "${jsonencode(compact(split(",",upper(join(",",var.metastore_events_filter)))))}",
-				"${length(var.database_filter) > 0 ? "${jsonencode("dbName")}: ${jsonencode(compact(split(",",lower(join(",",var.database_filter)))))}": ""}"
-			  )
-			)
-		  )
+		val = jsonencode(
+				"eventType": "${compact(split(",",upper(join(",",var.metastore_events_filter))))}",
+                "dbName": "${compact(split(",",lower(join(",",var.database_filter))))}"
 		)
-	  }
+	}
 }
 
 
