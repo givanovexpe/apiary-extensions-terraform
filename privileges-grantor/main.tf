@@ -79,10 +79,10 @@ data "template_file" "filter_policy" {
 }
 JSON
 	vars {
-		val = jsonencode(
+		val = "${jsonencode(
 				"eventType": "${compact(split(",",upper(join(",",var.metastore_events_filter))))}",
                 "dbName": "${compact(split(",",lower(join(",",var.database_filter))))}"
-		)
+		)}"
 	}
 }
 
